@@ -1,0 +1,150 @@
+/* Add some color to synced posts */
+.wp-list-table tr > :first-child {
+    padding-left: 10px;
+    border-left: 5px solid transparent;
+}
+
+.wp-list-table tr.synced-object > :first-child {
+    border-left-color: #0073aa;
+}
+
+.wp-list-table tr.synced-object-alt-source > :first-child {
+    border-left-color: #ffad10;
+}
+
+.wp-list-table tr.detached-object > :first-child {
+    border-left-color: #cfd3d6;
+}
+
+/* Visual change indicating progress */
+.ea-working {
+    pointer-events: none;
+}
+
+.ea-working * {
+    opacity: .2;
+}
+
+.ea-working td, .ea-working th {
+    background-color: #fff;
+}
+
+.ea-working > :first-child {
+    position: relative;
+    opacity: 1;
+    color: rgba( 0, 0, 0, .2 );
+}
+
+.ea-working > :first-child:after {
+    content: "\f111";
+    position: absolute;
+    left: 30px;
+    top: 25px;
+    font: normal 400 40px dashicons;
+    text-decoration: inherit;
+    color: #0073aa;
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+/* Block out post elements on synced post */
+body.synced-object input,
+body.synced-object textarea,
+body.synced-object .postbox,
+body.synced-object #poststuff ,
+body.synced-object .form-table{
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: grayscale( 80% );
+}
+
+body.synced-object button,
+body.synced-object input[type="button"],
+body.synced-object .button,
+body.synced-object .submitdelete,
+body.synced-object a[class*="edit-"] {
+    opacity: 0;
+}
+
+body.synced-object .mce-toolbar,
+body.synced-object #major-publishing-actions,
+body.synced-object #save-action,
+body.synced-object #preview-action {
+    display: none;
+}
+
+/* Alert tooltip */
+.ea-alert {
+    display: inline-block;
+    position: relative;
+    height: 1em;
+    width: 1em;
+}
+
+.ea-alert:before {
+    content: "\f534";
+    font-family: dashicons;
+    text-decoration: inherit;
+    font-weight: 400;
+    font-style: normal;
+    color: #EB1701;
+}
+
+.ea-alert span {
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 300ms ease-in-out;
+    position: absolute;
+    bottom: 100%;
+    left: -75px;
+    font-size: .7em;
+    line-height: 1em;
+    text-align: center;
+    width: 150px;
+    padding: 5px;
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.ea-alert:hover span {
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Media Modifications */
+.attachment-preview[data-object-synced]:not([data-object-synced=""]) .thumbnail {
+    opacity: .6;
+}
+
+.attachment-preview[data-object-synced]:not([data-object-synced=""]) {
+    position: relative;
+}
+
+.attachment-preview[data-object-synced]:not([data-object-synced=""]) .ea-synced-info {
+    position: absolute;
+    padding: 5px 3px 5px 10px;
+    background-color: rgba( 255, 255, 255, .8 );
+    border-left: solid 5px #EB1701;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: #23282d;
+    font-weight: bold;
+}
+
+#consumer_sites .inside p {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.syndicate-toggle {
+    display: block;
+    margin-bottom: 10px;
+}
