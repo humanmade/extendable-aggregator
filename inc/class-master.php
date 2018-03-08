@@ -19,7 +19,7 @@ class Master {
 	 * @var
 	 */
 	public $definitions;
-	
+
 	/**
 	 * Source site ref.
 	 *
@@ -118,7 +118,8 @@ class Master {
 
 		do_action( 'pre-init-extendable-aggregator', $this );
 		$this->add_hooks();
-		$this->register_cron();
+		// Register cron on wp_loaded
+		add_action( 'wp_loaded', array( $this, 'register_cron' ) );
 
 		$this->is_initialised = true;
 	}
@@ -143,7 +144,6 @@ class Master {
 	 * Register the cron job for syncing
 	 */
 	public function register_cron() {
-
 		if ( ! wp_next_scheduled( 'extendable-aggregator-sync-cron' ) ) {
 			wp_schedule_event( time(), '5-mins', 'extendable-aggregator-sync-cron' );
 		}
