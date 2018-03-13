@@ -85,7 +85,7 @@ abstract class Base {
 	 * @param int $object_id Post or term ID
 	 * @return bool True for synced object, false for not-synced
 	 */
-	protected function is_synced( $object_id ) {
+	public function is_synced( $object_id ) {
 		return (
 			(bool) $this->get_synced_meta( $object_id )
 			&& ! $this->is_destination_detached( $object_id )
@@ -104,7 +104,7 @@ abstract class Base {
 	 * @param int $object_id Post or term ID
 	 * @return bool True for synced object, false for not-synced
 	 */
-	protected function is_synced_detached( $object_id ) {
+	public function is_synced_detached( $object_id ) {
 		return (
 			(bool) $this->get_synced_meta( $object_id )
 			&&  $this->is_destination_detached( $object_id )
@@ -134,7 +134,7 @@ abstract class Base {
 	 * @param int $destination_site_id Destination site ID to check.
 	 * @return bool True for syncing, false for not-syncing
 	 */
-	protected function is_syncable( $object_id, $destination_site_id ) {
+	public function is_syncable( $object_id, $destination_site_id ) {
 		$syncable = $this->syncable;
 		return $syncable::get_is_syncable( $destination_site_id, $object_id );
 	}
@@ -149,7 +149,7 @@ abstract class Base {
 	 * @param int $object_id Post or term ID
 	 * @return bool True for detached object, false for never-detached
 	 */
-	protected function is_destination_detached( $object_id ) {
+	public function is_destination_detached( $object_id ) {
 		$syncable = $this->syncable;
 		return $syncable::destination_is_detached( $object_id );
 	}
@@ -163,7 +163,7 @@ abstract class Base {
 	 * @param int $destination_site_id Destination site ID to check.
 	 * @return bool True for detached object, false for never-detached
 	 */
-	protected function is_source_detached( $object_id, $destination_site_id ) {
+	public function is_source_detached( $object_id, $destination_site_id ) {
 		$syncable = $this->syncable;
 		return $syncable::source_is_detached( $object_id, $destination_site_id );
 	}
@@ -189,7 +189,7 @@ abstract class Base {
 	 * @param int $object_id Post or term ID.
 	 * @return array Sites object is syncable to.
 	 */
-	protected function get_syncing_meta( $object_id ) {
+	public function get_syncing_meta( $object_id ) {
 		$syncable = $this->syncable;
 		return $syncable::get_meta( $object_id, sprintf( 'ea-syncable-%s-syncable-sites', $this->type ) );
 	}
@@ -499,7 +499,7 @@ abstract class Base {
 	 * @param int $object_id ID of object.
 	 */
 	abstract protected function get_object( $object_id );
-	
+
 	/**
 	 * Check meta to see if the synced object has an alternative source site which also wants to sync
 	 *
@@ -517,7 +517,7 @@ abstract class Base {
 	 * @access protected
 	 * @return bool
 	 */
-	protected function can_user_aggregate() {
+	public function can_user_aggregate() {
 		/**
 		 * Minimum capability that a user must have to detach or sync an object.
 		 *
@@ -582,7 +582,7 @@ abstract class Base {
 					esc_html( sprintf( __( 'Detach from %s', 'extendable-aggregator' ), $bloginfo->blogname ) )
 				);
 			}
-			
+
 			if ( \EA\get_source_url( $object_id, $this->type ) ) {
 				$actions['original'] = sprintf(
 					'<a href="%s">%s</a>.',
