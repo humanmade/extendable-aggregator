@@ -186,11 +186,11 @@ abstract class Base implements Base_Interface {
 
 			$args = [ 'by_site_ids' => [] ];
 
-			foreach ( static::get_syncable_sites( $object_id ) as $site_id ) {
+			foreach ( static::get_syncable_sites( $object_id ) as $site_id => $synced ) {
 				$args['by_site_ids'][ $site_id ] = static::get_meta( $object_id, sprintf( 'ea-syncable-%s-synced-to-%s', static::$name, $site_id ) );
 			}
 
-			static::add_action( 'delete', $object_id );
+			static::add_action( 'delete', $object_id, $args );
 		}
 
 		$site_id   = static::get_meta( $object_id, 'ea-syncable-import-src-site' );
@@ -214,7 +214,7 @@ abstract class Base implements Base_Interface {
 		if ( apply_filters( 'ea-syncable-suspend-sync-actions', false ) ) {
 			return;
 		}
-		
+
 		// Later fix to handle cases where objects can be syndicated from an attached syndicated object
 		// This should avoid issues associated with switch_to_blog
 		if ( EA\Master::get_instance()->source_site !== get_current_blog_id() ) {
@@ -510,7 +510,7 @@ abstract class Base implements Base_Interface {
 			$wp_object_cache->__remoteset(); // important
 		}
 	}
-	
+
 	/**
 	 * Sync instantiated object onto a specified destination site
 	 *
@@ -643,7 +643,7 @@ abstract class Base implements Base_Interface {
 		 */
 		$do_dependencies = $recursion <= 3 ? true : false;
 		$do_dependencies = apply_filters( sprintf( 'ea-syncable-%s-filter-do-dependencies', static::$name ), $do_dependencies, $recursion, $sync_object, $this );
-		
+
 		if ( ! $do_dependencies ) {
 			$sync_object['dependencies'] = [];
 			return $sync_object;

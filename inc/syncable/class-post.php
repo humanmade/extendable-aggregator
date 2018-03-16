@@ -24,7 +24,7 @@ class Post extends Base {
 	/**
 	 * @public array $delete_hooks The actions/filters used to trigger deleting of a synced object
 	 */
-	public static $delete_hooks = array( 'delete_post' );
+	public static $delete_hooks = array( 'before_delete_post' );
 
 	/**
 	 * @public array actions which have been queued by updating an object which is marked as syncable
@@ -236,8 +236,8 @@ class Post extends Base {
 		// Try to find a match via looking up of the canonical ID set on the post being synced
 		if ( ! $exists_mapped && ! empty( $meta['ea-syncable-import-src-id-canonical'][0] ) ) {
 			$exists_mapped = CanonicalLookup\Post\lookup_for_canonical_id( $meta['ea-syncable-import-src-id-canonical'][0], $meta['ea-syncable-import-src-site-canonical'][0] );
-		} 
-		
+		}
+
 		if ( ! $exists_mapped ) {
 			$exists_mapped = CanonicalLookup\Post\lookup_for_canonical_id( $this->get_source_object_id(), $sync_object['source_site'] );
 		}

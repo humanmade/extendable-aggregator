@@ -24,7 +24,7 @@ class Term extends Base {
 	/**
 	 * @public array $delete_hooks The actions/filters used to trigger deleting of a synced object
 	 */
-	public static $delete_hooks = [ 'delete_term' ];
+	public static $delete_hooks = [ 'pre_delete_term' ];
 
 	/**
 	 * @public array actions which have been queued by updating an object which is marked as syncable
@@ -219,7 +219,7 @@ class Term extends Base {
 		if ( empty( $term ) || is_wp_error( $term ) ) {
 			$link = '';
 		}
-		
+
 		return $link;
 	}
 
