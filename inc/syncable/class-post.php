@@ -110,6 +110,8 @@ class Post extends Base {
 				$syncable->sync_to( $site_id, $action );
 			}
 		}
+
+		do_action( printf( 'ea-syncable-%s-action-after-queue', $action ), static::get_syncable_sites( $id ), $action  );
 	}
 
 	/**
