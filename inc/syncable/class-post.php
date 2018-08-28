@@ -111,7 +111,7 @@ class Post extends Base {
 			}
 		}
 
-		do_action( printf( 'ea-syncable-%s-action-after-queue', $action ), static::get_syncable_sites( $id ), $id );
+		do_action( sprintf( 'ea-syncable-%s-action-after-queue', $action ), static::get_syncable_sites( $id ), $id );
 	}
 
 	/**
