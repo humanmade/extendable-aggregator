@@ -136,8 +136,8 @@ class Term extends Base {
 
 			$slug .= '<strong>' . esc_html( sprintf( __( ' - Synced from %s', 'extendable-aggregator' ), $blog_info->blogname ) ) . '</strong>';
 		}
-		
-		if ( $this->get_alternative_sources( $term->term_id ) ) {
+
+		if ( is_admin() && 'edit-tags' === $screen->base && $this->get_alternative_sources( $term->term_id ) ) {
 			$slug .= '<strong>' . esc_html(  __( ' - Alternative sources available', 'extendable-aggregator' ) ) . '</strong>';
 		}
 
