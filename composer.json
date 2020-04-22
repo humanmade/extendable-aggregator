@@ -1,0 +1,8 @@
+{
+	"name": "humanmade/extendable-aggregator",
+	"description": "Multisite post syncing framework",
+	"homepage": "https://github.com/humanmade/extendable-aggregator",
+	"type": "wordpress-plugin",
+	"license": "GPL-3.0-or-later",
+	"require": {}
+}
