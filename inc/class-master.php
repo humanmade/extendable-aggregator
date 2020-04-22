@@ -161,8 +161,20 @@ class Master {
 			$this->set_syncable_hooks( $class );
 		}
 
-		// Run Admin hooks
-		Admin\Admin::get_instance()->hooks();
+
+		/**
+		 * Add a filter to allow a developer to turn off the admin loading of the plugin.
+		 *
+		 * EA is useful simply as a backend tool that one could build their own admin UI on top
+		 * of; particularly if they have custom workflow needs. This allows a project to disable
+		 * only the admin UI functionality of Extendable Aggregator.
+		 *
+		 * @param bool $should_use_admin
+		 */
+		$should_use_admin = apply_filters( 'extendable-aggregator-use-admin-ui', true );
+		if ( $should_use_admin ) {
+			Admin\Admin::get_instance()->hooks();
+		}
 
 		$this->is_initialised = true;
 	}
