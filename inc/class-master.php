@@ -145,7 +145,14 @@ class Master {
 	 */
 	public function register_cron() {
 		if ( ! wp_next_scheduled( 'extendable-aggregator-sync-cron' ) ) {
-			wp_schedule_event( time(), '5-mins', 'extendable-aggregator-sync-cron' );
+
+			/**
+			 * Allow a project to change the interval for syncing content across sites.
+			 *
+			 * @param string $interval Name of the registered cron schedule to use for syncing.
+			 */
+			$interval = apply_filters( 'extendable-aggregator-sync-cron-interval', '5-mins' );
+			wp_schedule_event( time(), $interval, 'extendable-aggregator-sync-cron' );
 		}
 	}
 
