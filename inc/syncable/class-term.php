@@ -19,7 +19,7 @@ class Term extends Base {
 	/**
 	 * @public array $sync_hooks The actions/filters uses to trigger syncing of a syncable object
 	 */
-	public static $sync_hooks = [ 'create_term', 'edit_term' ];
+	public static $sync_hooks = [ 'created_term', 'edited_term' ];
 
 	/**
 	 * @public array $delete_hooks The actions/filters used to trigger deleting of a synced object

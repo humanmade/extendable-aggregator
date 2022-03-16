@@ -3,7 +3,7 @@
 Plugin name: Extendable Aggregator
 Description: Aggregates articles across multisite install
 Author: Human Made Limited
-Version: 1.0.0
+Version: 1.0.1
 */
 
 namespace EA;
